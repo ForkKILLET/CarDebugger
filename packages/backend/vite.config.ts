@@ -12,6 +12,7 @@ export default defineConfig({
       appPath: './src/main.ts',
       exportName: 'fastify',
       tsCompiler: 'esbuild',
+      outputFormat: 'esm',
     })
   ],
 })

@@ -16,8 +16,8 @@
     "vite-plugin-node": "^5.0.1"
   },
   "dependencies": {
-    "@fastify/cors": "^11.0.1",
     "@car-debugger/shared": "workspace:*",
+    "@fastify/cors": "^11.0.1",
     "execa": "^9.5.3",
     "fastify": "^5.3.3",
     "fastify-type-provider-zod": "^4.0.2",
