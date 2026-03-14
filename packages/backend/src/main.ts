@@ -1,6 +1,6 @@
-import path from 'node:path'
-import fsSync from 'node:fs'
-import fs from 'node:fs/promises'
+import path from 'path'
+import fs from 'fs'
+import fsp from 'fs/promises'
 
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
@@ -58,16 +58,16 @@ const zConfig = z.object({
   })
 })
 
-const loadConfig = async () => {
+const loadConfig = () => {
   try {
-    const { backend: backendConfig } = zConfig.parse(JSON.parse(await fs.readFile(configFilePath, 'utf-8')))
+    const { backend: backendConfig } = zConfig.parse(JSON.parse(fs.readFileSync(configFilePath, 'utf-8')))
     return backendConfig
   }
   catch (err) {
     panic('Failed to load config: %o', err)
   }
 }
-const config = await loadConfig()
+const config = loadConfig()
 
 const executablePath = path.join(config.testDir, 'image_test.out')
 const datasetPath = path.join(config.testDir, 'data')
@@ -89,7 +89,7 @@ const runSession = async (session: Session) => {
 const sessions = new Map<string, Session>()
 
 const getDatasetList = async (): Promise<DatasetListRes> =>
-  JSON.parse(await fs.readFile(path.join(datasetPath, 'index.json'), 'utf-8'))
+  JSON.parse(await fsp.readFile(path.join(datasetPath, 'index.json'), 'utf-8'))
 
 fastify.get('/dataset-list', {
   schema: {
@@ -116,7 +116,7 @@ fastify.get('/dataset-image/:datasetName/:frameIndex', {
     return res.status(404)
   }
   const imagePath = path.join(datasetPath, 'images', `${datasetName}_${frameIndex}.${dataset.ext}`)
-  const imageStream = fsSync.createReadStream(imagePath)
+  const imageStream = fs.createReadStream(imagePath)
   return res
     .type('image/jpeg')
     .send(imageStream)
@@ -205,7 +205,7 @@ fastify.post('/run-frame', {
   }
 
   try {
-    await fs.stat(executablePath)
+    await fsp.stat(executablePath)
   }
   catch {
     return {
