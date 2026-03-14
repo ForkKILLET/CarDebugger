@@ -1,0 +1,27 @@
+{
+  "name": "@car-debugger/backend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.18",
+    "pino-pretty": "^13.0.0",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-node": "^5.0.1"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.0.1",
+    "@car-debugger/shared": "workspace:*",
+    "execa": "^9.5.3",
+    "fastify": "^5.3.3",
+    "fastify-type-provider-zod": "^4.0.2",
+    "pino": "^9.7.0",
+    "zod": "^3.24.4"
+  }
+}

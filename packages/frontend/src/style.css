@@ -1,0 +1,24 @@
+﻿.flex {
+  display: flex;
+  gap: .5rem;
+  align-items: baseline;
+}
+
+select, button {
+  height: 1.5rem;
+}
+
+button, input, select {
+  font-size: .8rem;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+  
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
